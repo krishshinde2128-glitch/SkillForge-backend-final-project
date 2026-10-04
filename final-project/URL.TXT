@@ -1,0 +1,135 @@
+1. Authentication (/api/auth)
+Present this first to show how users enter your platform and to generate the token you need for the rest of the presentation.
+
+Register a New User
+
+Method: POST
+
+URL: http://localhost:5001/api/auth/register
+
+Body (JSON):
+
+JSON
+{
+  "email": "examiner@test.com",
+  "password": "password123"
+}
+Log In (Generates JWT)
+
+Method: POST
+
+URL: http://localhost:5001/api/auth/login
+
+Body (JSON):
+
+JSON
+{
+  "email": "examiner@test.com",
+  "password": "password123"
+}
+(Make sure to copy the token from the response to use in the protected routes below!)
+
+2. Courses (/api/courses)
+Show this next to demonstrate your CRUD operations and RegExp search feature.
+
+Create a Course (Protected)
+
+Method: POST
+
+URL: http://localhost:5001/api/courses
+
+Body (JSON):
+
+JSON
+{
+  "title": "Mastering Node.js",
+  "description": "A complete guide to backend development.",
+  "instructor": "Krish Shinde",
+  "price": 499
+}
+Get All Courses (Public)
+
+Method: GET
+
+URL: http://localhost:5001/api/courses
+
+Body: (None)
+
+Search Courses (Public)
+
+Method: GET
+
+URL: http://localhost:5001/api/courses/search?keyword=node
+
+Body: (None)
+
+Update a Course (Protected)
+
+Method: PUT
+
+URL: http://localhost:5001/api/courses/<paste_course_id_here>
+
+Body (JSON):
+
+JSON
+{
+  "price": 299,
+  "title": "Mastering Node.js (Discounted)"
+}
+Delete a Course (Protected)
+
+Method: DELETE
+
+URL: http://localhost:5001/api/courses/<paste_course_id_here>
+
+Body: (None)
+
+3. Enrollments (/api/enrollments)
+Show this to demonstrate relational database mapping (connecting a User to a Course).
+
+Enroll in a Course (Protected)
+
+Method: POST
+
+URL: http://localhost:5001/api/enrollments
+
+Body (JSON):
+
+JSON
+{
+  "courseId": "<paste_any_course_id_here>"
+}
+(Note: You do not need to send the User ID in the body because your auth middleware automatically securely extracts it from the JWT!)
+
+View My Active Enrollments (Protected)
+
+Method: GET
+
+URL: http://localhost:5001/api/enrollments
+
+Body: (None)
+
+4. Reviews (/api/reviews)
+Show this to demonstrate user interaction and feedback on the platform.
+
+Leave a Course Review (Protected)
+
+Method: POST
+
+URL: http://localhost:5001/api/reviews
+
+Body (JSON):
+
+JSON
+{
+  "courseId": "<paste_any_course_id_here>",
+  "rating": 5,
+  "comment": "This course was incredibly helpful for my B.Tech project!"
+}
+Get Reviews for a Specific Course (Public)
+
+Method: GET
+
+URL: http://localhost:5001/api/reviews/<paste_course_id_here>
+
+Body: (None)
